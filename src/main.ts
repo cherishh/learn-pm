@@ -1,15 +1,24 @@
 import { EditorState } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { Schema, DOMParser } from 'prosemirror-model';
-import { marks, nodes } from 'prosemirror-schema-basic';
-// import './style.less';
+import { mySchema } from './schema';
+import { baseKeymap } from 'prosemirror-commands';
+import { keymap } from 'prosemirror-keymap';
+import { history, undo, redo } from 'prosemirror-history';
+
+import './style.less';
 
 const app = document.querySelector<HTMLDivElement>('#editor')!;
 
-const mySchema = new Schema({ marks, nodes });
-
-window.view = new EditorView(document.querySelector('#editor'), {
+export const view = new EditorView(app, {
   state: EditorState.create({
-    doc: DOMParser.fromSchema(mySchema).parse(app),
+    schema: mySchema,
+    plugins: [keymap(baseKeymap), history(), keymap({ 'Mod-z': undo, 'Shift-Mod-z': redo })],
   }),
+  dispatchTransaction(transaction) {
+    console.log('Document went from', transaction.before.content, 'to', transaction.doc.content);
+    let newState = view.state.apply(transaction);
+    view.updateState(newState);
+  },
 });
+
+window.view = view;

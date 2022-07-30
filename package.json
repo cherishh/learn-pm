@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --port 3001",
+    "dev": "vite --port 3003",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
@@ -27,6 +27,7 @@
     "prosemirror-model": "^1.18.1",
     "prosemirror-schema-basic": "^1.2.0",
     "prosemirror-state": "^1.4.0",
-    "prosemirror-view": "^1.26.1"
+    "prosemirror-view": "^1.26.1",
+    "tippy.js": "^6.3.7"
   }
 }
