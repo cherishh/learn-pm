@@ -1,4 +1,5 @@
 import { Schema } from 'prosemirror-model';
+import { toggleMark } from 'prosemirror-commands';
 
 export const mySchema: Schema = new Schema({
   nodes: {
@@ -17,5 +18,18 @@ export const mySchema: Schema = new Schema({
     },
     text: { inline: true },
   },
-  marks: {},
+  marks: {
+    bold: {
+      parseDOM: [{ tag: 'b' }],
+      toDOM() {
+        const b = document.createElement('b');
+        return {
+          dom: b,
+          contentDOM: b,
+        };
+      },
+    },
+  },
 });
+
+export const boldCommand = toggleMark(mySchema.marks.bold);
