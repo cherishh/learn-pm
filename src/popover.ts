@@ -4,37 +4,60 @@ import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
 
-function createPopover(el: HTMLElement) {
-  const popover = tippy(el, {
-    content: el.textContent || '',
+const key = new PluginKey('popover');
+
+const createPopover = (content: string) => {
+  const popover = tippy(document.body, {
+    content: content || '',
     placement: 'top',
     theme: 'light',
     showOnCreate: false,
     interactive: true,
-    trigger: 'mouseenter click',
-    appendTo: el,
+    trigger: 'manual',
   });
 
   return popover;
-}
+};
 
-export const createPlugin = () => {
-  const key = new PluginKey('popover');
-  const popover = createPopover();
+const calcPopoverPos = (editorView: EditorView) => {
+  const { anchor, head } = editorView.state.selection;
+  const headCoord = editorView.coordsAtPos(head);
+
+  const clientRect = new DOMRect(
+    headCoord.left,
+    headCoord.top,
+    headCoord.right - headCoord.left,
+    headCoord.bottom - headCoord.top,
+  );
+
+  return clientRect;
+};
+
+export const popoverPlugin = (text: string) => {
+  const popover = createPopover(text);
+
   return new Plugin({
     key,
     view: (editorView: EditorView) => {
       return {
-        update(view) {},
-        destroy() {},
+        update(view) {
+          const selection = editorView.state.selection;
+          const { anchor, head } = selection;
+          console.log(selection, 11);
+          if (anchor === head) {
+            popover.hide();
+          } else {
+            popover.setProps({
+              getReferenceClientRect: () => calcPopoverPos(view),
+            });
+
+            popover.show();
+          }
+        },
+        destroy() {
+          popover.destroy();
+        },
       };
     },
   });
-};
-
-const getPosition = (editorView: EditorView) => {
-  const pos = editorView.state.selection.anchor;
-  const coords = editorView.coordsAtPos(pos);
-  const clientRect = new DOMRect(coords.left, coords.top, coords.right - coords.left, coords.bottom - coords.top);
-  return clientRect;
 };
