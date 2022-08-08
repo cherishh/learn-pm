@@ -1,12 +1,12 @@
 import { Schema } from 'prosemirror-model';
-import { toggleMark } from 'prosemirror-commands';
+import { emojiSchema } from './emojiSchema';
 
 export const mySchema: Schema = new Schema({
   nodes: {
     doc: { content: 'block+' },
     paragraph: {
       group: 'block',
-      content: 'text*',
+      content: 'inline*',
       parseDOM: [{ tag: 'p' }],
       toDOM() {
         const p = document.createElement('p');
@@ -16,7 +16,8 @@ export const mySchema: Schema = new Schema({
         };
       },
     },
-    text: { inline: true },
+    emoji: emojiSchema,
+    text: { group: 'inline' },
   },
   marks: {
     bold: {
@@ -31,5 +32,3 @@ export const mySchema: Schema = new Schema({
     },
   },
 });
-
-export const boldCommand = toggleMark(mySchema.marks.bold);

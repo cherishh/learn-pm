@@ -43,7 +43,6 @@ export const popoverPlugin = (text: string) => {
         update(view) {
           const selection = editorView.state.selection;
           const { anchor, head } = selection;
-          console.log(selection, 11);
           if (anchor === head) {
             popover.hide();
           } else {
