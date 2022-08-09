@@ -66,6 +66,7 @@ btn3?.addEventListener('click', () => {
     content: JSON.stringify(content.toJSON()),
     contentText,
   });
+  alert(`${contentText} \n\n打开控制台查看更多`);
 });
 
 window.view = view;
