@@ -21,7 +21,7 @@ const schemeNodes = mySchema.nodes;
 export const quoteAllowedNodeInfo = new Map<string, any>([
   [schemeNodes.emoji.name, (node: Node) => (node.attrs.type ? `[${node.attrs.type}]` : `[表情]`)],
   [schemeNodes.text.name, (node: Node) => node.textContent],
-  [schemeNodes.paragraph.name, (node: Node) => ''],
+  [schemeNodes.paragraph.name, (node: Node) => ' '],
 ]);
 
 export const isLeafNode = (node: Node) => {
