@@ -1,8 +1,6 @@
 import { toggleMark } from 'prosemirror-commands';
-import { EditorState, Transaction } from 'prosemirror-state';
-import { Node } from 'prosemirror-model';
 import { mySchema } from './schema';
-import { addEmojiStyle } from './addEmojiStyle';
+import { addEmojiStyle } from './utils';
 import { EditorView } from 'prosemirror-view';
 
 const emojiType = mySchema.nodes.emoji;

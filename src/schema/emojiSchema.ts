@@ -24,7 +24,7 @@ export const emojiSchema: NodeSpec = {
       class: `emoji`,
       'data-emoji-type': type,
     };
-    return ['img', nodeAttrs, 0];
+    return ['img', nodeAttrs];
   },
   parseDOM: [
     {
