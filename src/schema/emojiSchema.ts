@@ -10,7 +10,7 @@ const isEmoji =
 
 export const emojiSchema: NodeSpec = {
   attrs: {
-    type: { default: 'ok' },
+    type: { default: 'OK' },
   },
   inline: true,
   group: 'inline',
@@ -21,7 +21,7 @@ export const emojiSchema: NodeSpec = {
     } = node;
     const nodeAttrs = {
       src: bg,
-      class: `emoji emoji-${type}`,
+      class: `emoji`,
       'data-emoji-type': type,
     };
     return ['img', nodeAttrs, 0];
@@ -30,7 +30,7 @@ export const emojiSchema: NodeSpec = {
     {
       tag: 'img[emoji-type]',
       getAttrs: (dom) => {
-        let type = (dom as HTMLImageElement).getAttribute('emoji-type') || '';
+        const type = (dom as HTMLImageElement).getAttribute('emoji-type') || '';
         return isEmoji(emojis)(type) ? { type } : false;
       },
     },

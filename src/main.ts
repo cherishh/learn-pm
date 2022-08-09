@@ -30,10 +30,9 @@ export const view = new EditorView(app, {
 
 const btn = document.querySelector('#btn');
 btn?.addEventListener('click', () => {
-  return insertEmoji('ok')(view.state, view.dispatch);
-  const type = prompt('emoji可选值为： ok, heart, clap', 'ok') || 'ok';
-  if (['ok', 'heart', 'clap'].indexOf(type) !== -1) {
-    insertEmoji(type)(view.state, view.dispatch);
+  const type = prompt('emoji可选值为： OK, 心心, 鼓掌', 'OK') || 'OK';
+  if (['OK', '心心', '鼓掌'].indexOf(type) !== -1) {
+    insertEmoji(type)(view);
   }
 });
 

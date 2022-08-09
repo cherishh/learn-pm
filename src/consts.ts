@@ -3,24 +3,21 @@ export const bg =
 
 export const emojis = [
   {
-    type: 'ok',
-    name: 'OK',
+    type: 'OK',
     position: {
       x: -6.98958,
       y: -3,
     },
   },
   {
-    type: 'heart',
-    name: '心心',
+    type: '心心',
     position: {
       x: -10,
       y: -11,
     },
   },
   {
-    type: 'clap',
-    name: '鼓掌',
+    type: '鼓掌',
     position: {
       x: -8.07292,
       y: -6.02083,
