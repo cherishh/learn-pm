@@ -70,3 +70,8 @@ btn3?.addEventListener('click', () => {
 });
 
 window.view = view;
+
+const json = await fetch('https://s3plus.meituan.net/v1/mss_9d9e5b6deadb43adac208535b2d92427/files/emojis.json', {
+  credentials: 'omit',
+});
+console.log(await json.json());
