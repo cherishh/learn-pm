@@ -15,6 +15,7 @@ export const insertEmoji = (type: string) => {
     if (!$from.parent.canReplaceWith(index, index, emojiType)) return false;
     if (dispatch) {
       const tr = state.tr.replaceSelectionWith(emojiType.create({ type }));
+      console.log(tr, 'tr');
       dispatch(tr);
       addEmojiStyle();
     }
