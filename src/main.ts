@@ -11,32 +11,39 @@ import { getContentText, addEmojiStyle } from './utils';
 import { data } from './test';
 import './style.less';
 
-const app = document.querySelector<HTMLDivElement>('#editor')!;
+const editor = document.querySelector<HTMLDivElement>('#editor')!;
 const test = document.querySelector<HTMLDivElement>('#test')!;
 test.innerText = '123\nabc';
 
-export const view = new EditorView(app, {
+export const view = new EditorView(editor, {
   state: EditorState.create({
     schema: mySchema,
     plugins: [
       keymap(baseKeymap),
       history(),
       keymap({ 'Mod-z': undo, 'Shift-Mod-z': redo, 'Mod-b': boldCommand }),
-      popoverPlugin('pop!'),
+      // popoverPlugin('pop!'),
     ],
   }),
-  dispatchTransaction(transaction) {
-    // console.log(transaction, 'transaction');
+  dispatchTransaction(tr) {
+    console.log(tr, 'transaction');
+    console.log(tr.steps, 'steps');
     // console.log('Document went from', transaction.before.content, 'to', transaction.doc.content);
-    let newState = view.state.apply(transaction);
+    let newState = view.state.apply(tr);
     view.updateState(newState);
   },
 });
 
 const btn1 = document.querySelector('#btn');
 
+// btn1?.addEventListener('click', () => {
+//   insertCollapse()(view);
+// });
+
 btn1?.addEventListener('click', () => {
-  insertCollapse()(view);
+  const { state } = view;
+  const { tr, selection } = state;
+  console.log(selection, 'selection');
 });
 
 window.view = view;
