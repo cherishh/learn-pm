@@ -5,7 +5,7 @@ import { boldCommand } from './commands';
 import { baseKeymap } from 'prosemirror-commands';
 import { keymap } from 'prosemirror-keymap';
 import { history, undo, redo } from 'prosemirror-history';
-import { popoverPlugin } from './popover';
+import { popoverPlugin } from './plugins/popover';
 import { insertEmoji } from './commands';
 import { getContentText, addEmojiStyle } from './utils';
 import { data } from './test';
